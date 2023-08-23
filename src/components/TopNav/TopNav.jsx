@@ -4,22 +4,39 @@ import "./TopNav.css";
 import { useDispatch, useSelector} from "react-redux";
 import { selectData } from "../../Actions/DataAction";
 
+const getGroup = () => {
+  console.log(localStorage.getItem("group"));
+
+  if(localStorage.getItem("group")){
+    return localStorage.getItem("group");
+  }else{
+    return "status";
+  }
+}
+
+const getOrder = () => {
+  if(localStorage.getItem("order")){
+    return localStorage.getItem("order");
+  }else{
+    return "priority";
+  }
+}
 const TopNav = () => {
   const [displayOnClick, setDisplayOnClick] = useState(false);
   const dispatch = useDispatch();
   const {allTickets, allUser} = useSelector(state => state.DataReducer);
-  const [groupValue, setGroupValue] = useState(localStorage.getItem("group") | "status");
-  const [orderValue, setOrderValue] = useState( localStorage.getItem("order") | "priority");
+  const [groupValue, setGroupValue] = useState(getGroup());
+  const [orderValue, setOrderValue] = useState(getOrder());
 
   const handleGroupValue = (e, valueBool) => {
     if(valueBool){
       setGroupValue(e.target.value);
       setDisplayOnClick(!displayOnClick);
-      localStorage.setItem("group", groupValue);
+      localStorage.setItem("group", e.target.value);
     }else{
       setOrderValue(e.target.value);
     setDisplayOnClick(!displayOnClick);
-    localStorage.setItem("order", orderValue);
+    localStorage.setItem("order", e.target.value);
     }
   }
 
