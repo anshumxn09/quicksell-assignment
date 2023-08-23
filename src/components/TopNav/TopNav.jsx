@@ -5,7 +5,7 @@ import { useDispatch, useSelector} from "react-redux";
 import { selectData } from "../../Actions/DataAction";
 
 const getGroup = () => {
-  console.log(localStorage.getItem("group"));
+  // console.log(localStorage.getItem("group"));
 
   if(localStorage.getItem("group")){
     return localStorage.getItem("group");
